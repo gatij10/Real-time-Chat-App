@@ -32,6 +32,8 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+
+
 public class MainActivity extends AppCompatActivity {
 
     CircleImageView profile_image;
@@ -63,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
 
                 if (user != null) {
-                    if (user.getImageUrl().equals("default")) {
+                    if (user.getImageUrl()=="default") {
                             profile_image.setImageResource(R.mipmap.ic_launcher);
                         } else {
-                            Glide.with(MainActivity.this).load(user.getImageUrl()).into(profile_image);
+                            Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
                         }
                 }
 

@@ -6,6 +6,8 @@ public class User {
     private String username;
     private String imageUrl;
 
+
+
     public User(String id,String username, String imageUrl) {
         this.id=id;
         this.username=username;
