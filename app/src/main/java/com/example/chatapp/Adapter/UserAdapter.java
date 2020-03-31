@@ -18,6 +18,8 @@ import com.example.chatapp.R;
 
 import java.util.List;
 
+import static com.example.chatapp.R.mipmap.ic_launcher;
+
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private Context mContext;
@@ -42,7 +44,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         final User user  = mUsers.get(position);
         holder.username.setText(user.getUsername());
         if(user.getImageUrl()=="default"){
-            holder.profile_image.setImageResource(R.mipmap.ic_launcher);
+            holder.profile_image.setImageResource(ic_launcher);
         }else{
             Glide.with(mContext).load(user.getImageUrl()).into(holder.profile_image);
         }

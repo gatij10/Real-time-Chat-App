@@ -21,6 +21,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.example.chatapp.R.mipmap.ic_launcher;
+
 public class MessageActivity extends AppCompatActivity {
 
     CircleImageView profile_image;
@@ -55,15 +57,17 @@ public class MessageActivity extends AppCompatActivity {
         String userid = intent.getStringExtra("userid");
 
         fuser = FirebaseAuth.getInstance().getCurrentUser();
+        assert userid != null;
         reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
+                assert user != null;
                 username.setText(user.getUsername());
                 if(user.getImageUrl().equals("default")){
-                    profile_image.setImageResource(R.mipmap.ic_launcher);
+                    profile_image.setImageResource(ic_launcher);
                 }else{
                     Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
                 }

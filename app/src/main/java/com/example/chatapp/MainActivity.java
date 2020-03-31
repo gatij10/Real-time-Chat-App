@@ -32,6 +32,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.example.chatapp.R.mipmap.ic_launcher;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (user != null) {
                     if (user.getImageUrl()=="default") {
-                            profile_image.setImageResource(R.mipmap.ic_launcher);
+                            profile_image.setImageResource(ic_launcher);
                         } else {
                             Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
                         }
