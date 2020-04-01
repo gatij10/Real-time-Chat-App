@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.bumptech.glide.Glide;
 import com.example.chatapp.Fragments.ChatsFragment;
 import com.example.chatapp.Fragments.UsersFragment;
 import com.example.chatapp.Model.User;
@@ -31,8 +30,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static com.example.chatapp.R.mipmap.ic_launcher;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -65,13 +62,15 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
 
-                if (user != null) {
-                    if (user.getImageUrl()=="default") {
-                            profile_image.setImageResource(ic_launcher);
-                        } else {
-                            Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
-                        }
-                }
+                //if (user != null) {
+                   // if (user.getImageUrl()=="default") {
+                     //       profile_image.setImageResource(ic_launcher);
+                       // } else {
+                         //   Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
+                       // }
+               // }
+                username.setText(user.getUsername());
+                profile_image.setImageResource(R.mipmap.ic_launcher);
 
             }
 

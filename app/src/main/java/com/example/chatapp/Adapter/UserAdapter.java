@@ -11,14 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.example.chatapp.MainActivity;
+import com.example.chatapp.MessageActivity;
 import com.example.chatapp.Model.User;
 import com.example.chatapp.R;
 
 import java.util.List;
-
-import static com.example.chatapp.R.mipmap.ic_launcher;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
@@ -44,16 +41,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
         final User user  = mUsers.get(position);
         holder.username.setText(user.getUsername());
-        if(user.getImageUrl()=="default"){
-            holder.profile_image.setImageResource(ic_launcher);
-        }else{
-            Glide.with(mContext).load(user.getImageUrl()).into(holder.profile_image);
-        }
+       // if(user.getImageUrl()=="default"){
+        //    holder.profile_image.setImageResource(ic_launcher);
+        //}else{
+          //  Glide.with(mContext).load(user.getImageUrl()).into(holder.profile_image);
+        //}
+        holder.profile_image.setImageResource(R.mipmap.ic_launcher);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, MainActivity.class);
+                Intent intent = new Intent(mContext, MessageActivity.class);
                 intent.putExtra("userid",user.getId());
                 mContext.startActivity(intent);
             }

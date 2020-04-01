@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.bumptech.glide.Glide;
 import com.example.chatapp.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,8 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static com.example.chatapp.R.mipmap.ic_launcher;
 
 public class MessageActivity extends AppCompatActivity {
 
@@ -91,12 +88,12 @@ public class MessageActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 assert user != null;
                 username.setText(user.getUsername());
-                if(user.getImageUrl().equals("default")){
-                    profile_image.setImageResource(ic_launcher);
-                }else{
-                    Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
-                }
-
+                //if(user.getImageUrl()=="default"){
+                  //  profile_image.setImageResource(ic_launcher);
+                //}else{
+                  //  Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
+               // }
+                profile_image.setImageResource(R.mipmap.ic_launcher);
             }
 
             @Override
