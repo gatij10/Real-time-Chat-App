@@ -49,9 +49,6 @@ public class UsersFragment extends Fragment {
 
        return view;
 
-
-
-
     }
 
     private void readUsers() {
@@ -76,9 +73,10 @@ public class UsersFragment extends Fragment {
 
                 }
 
+
                 userAdapter = new UserAdapter(getContext(), mUsers);
                 recyclerView.setAdapter(userAdapter);
-                userAdapter.notifyDataSetChanged();
+                //userAdapter.notifyDataSetChanged();
 
 
 
