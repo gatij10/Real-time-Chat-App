@@ -94,7 +94,7 @@ public class ChatsFragment extends Fragment {
 
                     //display 1 user from chats
                     for (String id:usersList ){
-                        if(user.getId().equals(id)){
+                        if(user.getId()==id){
                             if(mUsers.size() != 0){
                                 for (User user1: mUsers){
                                     if (!user.getId().equals(user1.getId())){

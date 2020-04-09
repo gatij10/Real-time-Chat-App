@@ -56,7 +56,4 @@ public class User {
 
     public void setSearch(String search) { this.search = search; }
 
-
-
-
 }
