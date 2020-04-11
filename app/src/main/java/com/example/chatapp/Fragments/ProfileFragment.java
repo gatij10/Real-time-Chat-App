@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.chatapp.Model.User;
 import com.example.chatapp.R;
 import com.google.android.gms.tasks.Continuation;
@@ -75,11 +76,13 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
-               //if (user.getImageURL().equals("default")){
+                if(getActivity() == null)
+                    return;
+               if (user.getImageUrl() == "default"){
                     image_profile.setImageResource(R.mipmap.ic_launcher);
-                //} else {
-                  //  Glide.with(getContext()).load(user.getImageURL()).into(image_profile);
-                //}
+                } else {
+                    Glide.with(getContext()).load(user.getImageUrl()).into(image_profile);
+                }
             }
 
             @Override

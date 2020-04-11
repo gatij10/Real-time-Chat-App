@@ -44,7 +44,7 @@ public class UsersFragment extends Fragment {
                              Bundle savedInstanceState) {
        View view = inflater.inflate(R.layout.fragment_users, container, false);
 
-       recyclerView = view.findViewById(R.id.recycler_view);
+       recyclerView = view.findViewById(R.id.recycler_view1);
        recyclerView.setHasFixedSize(true);
        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -130,7 +130,7 @@ public class UsersFragment extends Fragment {
 
                     userAdapter = new UserAdapter(getContext(), mUsers, false);
                     recyclerView.setAdapter(userAdapter);
-                    //userAdapter.notifyDataSetChanged();
+                    userAdapter.notifyDataSetChanged();
 
 
                 }

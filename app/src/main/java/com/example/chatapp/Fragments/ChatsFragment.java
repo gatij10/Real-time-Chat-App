@@ -42,9 +42,11 @@ public class ChatsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_chats, container, false);
-        recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView = view.findViewById(R.id.recycler_view1);
         recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(userAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
 
         fuser= FirebaseAuth.getInstance().getCurrentUser();
 
@@ -88,6 +90,7 @@ public class ChatsFragment extends Fragment {
                 }
                 userAdapter = new UserAdapter(getContext(),mUsers,true);
                 recyclerView.setAdapter(userAdapter);
+                //userAdapter.notifyDataSetChanged();
             }
 
             @Override

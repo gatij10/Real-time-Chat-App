@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.chatapp.MessageActivity;
 import com.example.chatapp.Model.User;
 import com.example.chatapp.R;
@@ -43,15 +44,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
         final User user  = mUsers.get(position);
         holder.username.setText(user.getUsername());
-       // if(user.getImageUrl()=="default"){
-        //    holder.profile_image.setImageResource(ic_launcher);
-        //}else{
-          //  Glide.with(mContext).load(user.getImageUrl()).into(holder.profile_image);
-        //}
-       holder.profile_image.setImageResource(R.mipmap.ic_launcher);
+        if(user.getImageUrl() == "default"){
+            holder.profile_image.setImageResource(R.mipmap.ic_launcher);
+        }else{
+            Glide.with(mContext).load(user.getImageUrl()).into(holder.profile_image);
+        }
+
 
        if(isChat){
-           if(user.getStatus()=="online"){
+           if(user.getStatus().contentEquals("online")){
                holder.img_on.setVisibility(View.VISIBLE);
                holder.img_off.setVisibility(View.GONE);
            }else {
