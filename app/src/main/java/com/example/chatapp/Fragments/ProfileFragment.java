@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -72,13 +74,15 @@ public class ProfileFragment extends Fragment {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
 
         reference.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
-                if(getActivity() == null)
+               if(getActivity()==null){
                     return;
-               if (user.getImageUrl() == "default"){
+                }
+                if (user.getImageUrl()=="default"){
                     image_profile.setImageResource(R.mipmap.ic_launcher);
                 } else {
                     Glide.with(getContext()).load(user.getImageUrl()).into(image_profile);
