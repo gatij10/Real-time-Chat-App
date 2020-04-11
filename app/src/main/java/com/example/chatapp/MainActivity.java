@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.example.chatapp.Fragments.ChatsFragment;
 import com.example.chatapp.Fragments.ProfileFragment;
 import com.example.chatapp.Fragments.UsersFragment;
@@ -65,12 +66,12 @@ public class MainActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
 
                 //if (user != null) {
-                   // if (user.getImageUrl()=="default") {
-                     //       profile_image.setImageResource(ic_launcher);
-                       // } else {
-                         //   Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
-                       // }
-               // }
+                    if (user.getImageUrl()=="default") {
+                            profile_image.setImageResource(R.mipmap.ic_launcher);
+                        } else {
+                            Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
+                        }
+
                 username.setText(user.getUsername());
                 profile_image.setImageResource(R.mipmap.ic_launcher);
 

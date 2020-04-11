@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.chatapp.Adapter.MessageAdapter;
 import com.example.chatapp.Model.Chat;
 import com.example.chatapp.Model.User;
@@ -106,11 +107,11 @@ public class MessageActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 assert user != null;
                 username.setText(user.getUsername());
-                /*if(user.getImageUrl().equals("default")){
+                if(user.getImageUrl()=="default"){
                    profile_image.setImageResource(R.mipmap.ic_launcher);
                 }else{
-                   Glide.with(MessageActivity.this).load(user.getImageUrl()).into(profile_image);
-               }*/
+                   Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
+               }
                 profile_image.setImageResource(R.mipmap.ic_launcher);
                 readMessages(fuser.getUid(), userid,user.getImageUrl());
             }
