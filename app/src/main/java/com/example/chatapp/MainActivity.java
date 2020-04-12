@@ -64,13 +64,14 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
 
-                //if (user != null) {
-                   // if (user.getImageUrl()=="default") {
-                     //       profile_image.setImageResource(ic_launcher);
-                       // } else {
-                         //   Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
-                       // }
-               // }
+                if (user != null) {
+               //  if (user.getImageUrl()=="default") {
+                profile_image.setImageResource(R.mipmap.ic_launcher);
+                 //  } else {
+                   //  Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
+                //}
+            }
+
                 username.setText(user.getUsername());
                 profile_image.setImageResource(R.mipmap.ic_launcher);
 
