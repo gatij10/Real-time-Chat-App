@@ -18,6 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.chatapp.Fragments.ChatsFragment;
 import com.example.chatapp.Fragments.ProfileFragment;
 import com.example.chatapp.Fragments.UsersFragment;
+import com.example.chatapp.Model.Chat;
 import com.example.chatapp.Model.User;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -86,18 +87,41 @@ public class MainActivity extends AppCompatActivity {
         final TabLayout tabLayout = findViewById(R.id.tab_layout);
         final ViewPager viewPager = findViewById(R.id.view_pager);
 
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        viewPagerAdapter.appFragment(new ChatsFragment(), "Chats");
-        viewPagerAdapter.appFragment(new UsersFragment(), "Users");
-        viewPagerAdapter.appFragment(new ProfileFragment(), "Profile");
+        reference=FirebaseDatabase.getInstance().getReference("Chats");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+                int unread=0;
+                for (DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    Chat chat=snapshot.getValue(Chat.class);
+                    if (chat.getReceiver().equals(firebaseUser.getUid()) && !chat.isIsseen()){
+                        unread++;
+                    }
+                }
+                if (unread==0){
+                    viewPagerAdapter.appFragment(new ChatsFragment(), "Chats");
+
+                }else {
+                    viewPagerAdapter.appFragment(new ChatsFragment(), "("+unread+") Chats");
+
+                }
+                viewPagerAdapter.appFragment(new UsersFragment(), "Users");
+                viewPagerAdapter.appFragment(new ProfileFragment(), "Profile");
+
+                viewPager.setAdapter(viewPagerAdapter);
+                tabLayout.setupWithViewPager(viewPager);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
 
 
-
-
-        viewPager.setAdapter(viewPagerAdapter);
-
-        tabLayout.setupWithViewPager(viewPager);
 
     }
 
