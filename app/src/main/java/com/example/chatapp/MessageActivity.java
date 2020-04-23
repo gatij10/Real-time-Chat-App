@@ -15,7 +15,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.chatapp.Adapter.MessageAdapter;
 import com.example.chatapp.Fragments.APIService;
 import com.example.chatapp.Model.Chat;
@@ -126,13 +125,8 @@ public class MessageActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 String url = dataSnapshot.child("imageURL").getValue().toString();
-                //user.setImageUrl(url);
-                assert user != null;
+                Picasso.get().load(url).placeholder(R.mipmap.ic_launcher).fit().into(profile_image);
                 username.setText(user.getUsername());
-
-                    Picasso.get().load(url).placeholder(R.mipmap.ic_launcher).fit().into(profile_image);
-
-                profile_image.setImageResource(R.mipmap.ic_launcher);
                 readMessages(fuser.getUid(), userid,url);
             }
 

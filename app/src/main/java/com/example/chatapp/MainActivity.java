@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,17 +66,11 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
 
-                if (user != null) {
-               //  if (user.getImageUrl()=="default") {
-                profile_image.setImageResource(R.mipmap.ic_launcher);
-                 //  } else {
-                   //  Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
-                //}
-            }
+                String url = dataSnapshot.child("imageURL").getValue().toString();
+                Picasso.get().load(url).placeholder(R.mipmap.ic_launcher).fit().into(profile_image);
 
                 username.setText(user.getUsername());
-                profile_image.setImageResource(R.mipmap.ic_launcher);
-
+                //profile_image.setImageResource(R.mipmap.ic_launcher);
             }
 
             @Override

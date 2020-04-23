@@ -80,14 +80,8 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
-               if(getContext()==null){
-                    return;
-                }
-                 if (user.getImageUrl()=="default"){
-                image_profile.setImageResource(R.mipmap.ic_launcher);
-                  } else {
-                      Picasso.with(getContext()).load(imageUri).into(image_profile);
-                 }
+                String url = dataSnapshot.child("imageURL").getValue().toString();
+                Picasso.get().load(url).placeholder(R.mipmap.ic_launcher).fit().into(image_profile);
            }
 
             @Override
@@ -107,9 +101,10 @@ public class ProfileFragment extends Fragment {
     }
 
 
-  /*  @Override
+   /* @Override
     public void onResume() {
         super.onResume();
+        User user = null;
         if (user.getImageUrl().equals("default")) {
                 image_profile.setImageResource(R.mipmap.ic_launcher);
             } else {
@@ -188,7 +183,7 @@ public class ProfileFragment extends Fragment {
         if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null){
             imageUri = data.getData();
-            Picasso.with(getContext()).load(imageUri).into(image_profile);
+            Picasso.get().load(imageUri).into(image_profile);
 
             if (uploadTask != null && uploadTask.isInProgress()){
                 Toast.makeText(getContext(), "Upload in progress", Toast.LENGTH_SHORT).show();
