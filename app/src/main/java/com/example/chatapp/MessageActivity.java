@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.chatapp.Adapter.MessageAdapter;
 import com.example.chatapp.Fragments.APIService;
 import com.example.chatapp.Model.Chat;
@@ -32,6 +33,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -123,15 +125,15 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
+                String url = dataSnapshot.child("imageURL").getValue().toString();
+                //user.setImageUrl(url);
                 assert user != null;
                 username.setText(user.getUsername());
-                //  if(user.getImageUrl()=="default"){
+
+                    Picasso.get().load(url).placeholder(R.mipmap.ic_launcher).fit().into(profile_image);
+
                 profile_image.setImageResource(R.mipmap.ic_launcher);
-                // }else{
-                //  Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
-                //}
-                profile_image.setImageResource(R.mipmap.ic_launcher);
-                readMessages(fuser.getUid(), userid,user.getImageUrl());
+                readMessages(fuser.getUid(), userid,url);
             }
 
             @Override
