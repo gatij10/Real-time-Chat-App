@@ -14,6 +14,7 @@ import com.example.chatapp.Model.Chat;
 import com.example.chatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -53,11 +54,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     Chat chat=mChat.get(position);
     holder.show_message.setText(chat.getMessage());
 
-   // if (imageurl == "default"){
+   if (imageurl == "default"){
         holder.profile_image.setImageResource(R.mipmap.ic_launcher);
-    //}else {
-      //  Glide.with(mContext).load(imageurl).into(holder.profile_image);
-    //}
+    }else {
+       Picasso.get().load(imageurl).placeholder(R.mipmap.ic_launcher).fit().into(holder.profile_image);
+   }
 
 
         if(position == mChat.size()-1){
