@@ -35,6 +35,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
@@ -68,6 +69,7 @@ public class ProfileFragment extends Fragment {
         username = view.findViewById(R.id.username);
 
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
+        reference = FirebaseDatabase.getInstance().getReference("uploads");
 
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
@@ -78,15 +80,15 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
-               /*if(getActivity()==null){
+               if(getContext()==null){
                     return;
-                }*/
-               // if (user.getImageUrl()=="default"){
-                    image_profile.setImageResource(R.mipmap.ic_launcher);
-              //  } else {
-              //      Glide.with(getContext()).load(user.getImageUrl()).into(image_profile);
-               // }
-            }
+                }
+                 if (user.getImageUrl()=="default"){
+                image_profile.setImageResource(R.mipmap.ic_launcher);
+                  } else {
+                      Picasso.with(getContext()).load(imageUri).into(image_profile);
+                 }
+           }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -103,6 +105,18 @@ public class ProfileFragment extends Fragment {
 
         return view;
     }
+
+
+  /*  @Override
+    public void onResume() {
+        super.onResume();
+        if (user.getImageUrl().equals("default")) {
+                image_profile.setImageResource(R.mipmap.ic_launcher);
+            } else {
+                Picasso.with(getContext()).load(imageUri).into(image_profile);
+            }
+        }*/
+
 
     private void openImage() {
         Intent intent = new Intent();
@@ -143,6 +157,7 @@ public class ProfileFragment extends Fragment {
                         Uri downloadUri = task.getResult();
                         String mUri = downloadUri.toString();
 
+
                         reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("imageURL", ""+mUri);
@@ -173,6 +188,7 @@ public class ProfileFragment extends Fragment {
         if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null){
             imageUri = data.getData();
+            Picasso.with(getContext()).load(imageUri).into(image_profile);
 
             if (uploadTask != null && uploadTask.isInProgress()){
                 Toast.makeText(getContext(), "Upload in progress", Toast.LENGTH_SHORT).show();

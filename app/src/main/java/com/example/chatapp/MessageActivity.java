@@ -125,11 +125,11 @@ public class MessageActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 assert user != null;
                 username.setText(user.getUsername());
-             //  if(user.getImageUrl()=="default"){
-                   profile_image.setImageResource(R.mipmap.ic_launcher);
-               // }else{
-                 //  Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
-               //}
+                //  if(user.getImageUrl()=="default"){
+                profile_image.setImageResource(R.mipmap.ic_launcher);
+                // }else{
+                //  Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
+                //}
                 profile_image.setImageResource(R.mipmap.ic_launcher);
                 readMessages(fuser.getUid(), userid,user.getImageUrl());
             }
