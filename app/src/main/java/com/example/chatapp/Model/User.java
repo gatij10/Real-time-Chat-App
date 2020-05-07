@@ -10,10 +10,10 @@ public class User {
 
 
 
-    public User(String id, String username, String imageUrl, String search) {
+    public User(String id, String username, String imageURL, String search) {
         this.id=id;
         this.username=username;
-        this.imageURL=imageUrl;
+        this.imageURL=imageURL;
         this.search = search;
         this.status = status;
     }
@@ -42,7 +42,7 @@ public class User {
         return imageURL;
     }
 
-    public void setImageUrl(String imageUrl) { this.imageURL = imageUrl; }
+    public void setImageUrl(String imageURL) { this.imageURL = imageURL; }
 
     public String getStatus() {
         return status;

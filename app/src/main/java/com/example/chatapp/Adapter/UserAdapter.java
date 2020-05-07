@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.chatapp.MessageActivity;
 import com.example.chatapp.Model.Chat;
 import com.example.chatapp.Model.User;
@@ -22,7 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -54,8 +54,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.username.setText(user.getUsername());
 
 
+       if (user.getImageUrl().equals("default")){
+            holder.profile_image.setImageResource(R.mipmap.ic_launcher);
 
-            Picasso.get().load(user.getImageUrl()).placeholder(R.mipmap.ic_launcher).fit().into(holder.profile_image);
+        } else {
+            Glide.with(mContext).load(user.getImageUrl()).into(holder.profile_image);
+        }
 
         if (ischat){
             lastMessage(user.getId(), holder.last_msg);
