@@ -4,7 +4,7 @@ public class User {
 
     private String id;
     private String username;
-    private String imageUrl;
+    private String imageURL;
     private String status;
     private String search;
 
@@ -13,7 +13,7 @@ public class User {
     public User(String id, String username, String imageUrl, String search) {
         this.id=id;
         this.username=username;
-        this.imageUrl=imageUrl;
+        this.imageURL=imageUrl;
         this.search = search;
         this.status = status;
     }
@@ -39,10 +39,10 @@ public class User {
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return imageURL;
     }
 
-    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageURL = imageUrl; }
 
     public String getStatus() {
         return status;
